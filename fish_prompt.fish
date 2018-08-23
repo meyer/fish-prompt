@@ -18,8 +18,13 @@ function fish_prompt
     echo -n " "
   set_color cyan
   echo -n (prompt_pwd)
-  set_color normal
-  echo -n (__fish_git_prompt)
+
+  # only call __fish_git_prompt if DISABLE_GIT_IN_SHELL is falsey
+  if test -z "$DISABLE_GIT_IN_SHELL"
+    set_color normal
+    echo -n (__fish_git_prompt)
+  end
+
   set_color green
   echo -n " ❯ "
   set_color normal
